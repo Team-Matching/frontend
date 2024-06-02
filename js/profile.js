@@ -89,27 +89,62 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    document.getElementById('skillForm').addEventListener('submit', async function(event) {
-        event.preventDefault();
-        const description = document.getElementById('skillInput').value;
-        const data = await addSkill({ description });
-        if (data) {
-            const skillTab = document.getElementById('skillDetails');
-            skillTab.innerHTML += `<p>${data.description}</p>`;
-            document.getElementById('skillInput').value = ''; // 폼 리셋
-        }
-    });
+    const skills = [];
 
-    document.getElementById('interestForm').addEventListener('submit', async function(event) {
-        event.preventDefault();
-        const description = document.getElementById('interestInput').value;
-        const data = await addInterest({ description });
-        if (data) {
-            const interestTab = document.getElementById('interestDetails');
-            interestTab.innerHTML += `<p>${data.description}</p>`;
-            document.getElementById('interestInput').value = ''; // 폼 리셋
-        }
-    });
+document.getElementById('addSkillButton').addEventListener('click', function(event) {
+    const skillInput = document.getElementById('skillInput');
+    const skill = skillInput.value.trim();
+    if (skill) {
+        skills.push({ skill });
+        updateSkillList();
+        skillInput.value = ''; // 입력 필드 초기화
+    }
+});
+
+document.getElementById('skillForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+    const data = await addSkill({ skills });
+    if (data) {
+        const skillTab = document.getElementById('skillDetails');
+        skillTab.innerHTML = data.map(skill => `<p>${skill.skill}</p>`).join('');
+        skills.length = 0; // 스킬 배열 초기화
+        updateSkillList();
+    }
+});
+
+function updateSkillList() {
+    const skillList = document.getElementById('skillList');
+    skillList.innerHTML = skills.map(skill => `<li>${skill.skill}</li>`).join('');
+}
+
+const interests = [];
+
+document.getElementById('addInterestButton').addEventListener('click', function(event) {
+    const interestInput = document.getElementById('interestInput');
+    const interest = interestInput.value.trim();
+    if (interest) {
+        interests.push({ interest });
+        updateInterestList();
+        interestInput.value = ''; // 입력 필드 초기화
+    }
+});
+
+document.getElementById('interestForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+    const data = await addInterest({ interests });
+    if (data) {
+        const interestTab = document.getElementById('interestDetails');
+        interestTab.innerHTML = data.map(interest => `<p>${interest.interest}</p>`).join('');
+        interests.length = 0; // 관심사 배열 초기화
+        updateInterestList();
+    }
+});
+
+function updateInterestList() {
+    const interestList = document.getElementById('interestList');
+    interestList.innerHTML = interests.map(interest => `<li>${interest.interest}</li>`).join('');
+}
+
 });
 
 async function loadProfileData() {
@@ -173,14 +208,15 @@ async function loadSkillData() {
     const data = await loadSkill();
     if (data) {
         const skillTab = document.getElementById('skillDetails');
-        skillTab.innerHTML = data.map(skill => `<p>${skill.description}</p>`).join('');
+        skillTab.innerHTML = data.map(skill => `<p>${skill.skill}</p>`).join('');
     }
 }
+
 
 async function loadInterestData() {
     const data = await loadInterest();
     if (data) {
         const interestTab = document.getElementById('interestDetails');
-        interestTab.innerHTML = data.map(interest => `<p>${interest.description}</p>`).join('');
+        interestTab.innerHTML = data.map(interest => `<p>${interest.interest}</p>`).join('');
     }
 }
