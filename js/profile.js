@@ -25,34 +25,67 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('careerForm').addEventListener('submit', async function(event) {
         event.preventDefault();
-        const description = document.getElementById('careerInput').value;
-        const data = await addCareer({ description });
+        const company = document.getElementById('company').value;
+        const role = document.getElementById('role').value;
+        const startDate = document.getElementById('startDate').value;
+        const endDate = document.getElementById('endDate').value;
+        const description = document.getElementById('description').value;
+    
+        const data = await addCareer({ company, role, startDate, endDate, description });
         if (data) {
             const careerTab = document.getElementById('careerDetails');
-            careerTab.innerHTML += `<p>${data.description}</p>`;
-            document.getElementById('careerInput').value = ''; // 폼 리셋
+            careerTab.innerHTML += `
+                <div class="career-item">
+                    <h4>${data.company}</h4>
+                    <p><strong>Role:</strong> ${data.role}</p>
+                    <p><strong>Period:</strong> ${data.startDate} - ${data.endDate}</p>
+                    <p><strong>Description:</strong> ${data.description}</p>
+                </div>
+            `;
+            document.getElementById('careerForm').reset(); // 폼 리셋
         }
     });
-
+    
     document.getElementById('certificationForm').addEventListener('submit', async function(event) {
         event.preventDefault();
-        const description = document.getElementById('certificationInput').value;
-        const data = await addCertification({ description });
+        const certificationName = document.getElementById('certificationName').value;
+        const issuer = document.getElementById('issuer').value;
+        const dateObtained = document.getElementById('dateObtained').value;
+    
+        const data = await addCertification({ certificationName, issuer, dateObtained });
         if (data) {
             const certificationTab = document.getElementById('certificationDetails');
-            certificationTab.innerHTML += `<p>${data.description}</p>`;
-            document.getElementById('certificationInput').value = ''; // 폼 리셋
+            certificationTab.innerHTML += `
+                <div class="certification-item">
+                    <h4>${data.certificationName}</h4>
+                    <p><strong>Issuer:</strong> ${data.issuer}</p>
+                    <p><strong>Date Obtained:</strong> ${data.dateObtained}</p>
+                </div>
+            `;
+            document.getElementById('certificationForm').reset(); // 폼 리셋
         }
     });
-
+    
     document.getElementById('educationForm').addEventListener('submit', async function(event) {
         event.preventDefault();
-        const description = document.getElementById('educationInput').value;
-        const data = await addEducation({ description });
+        const institution = document.getElementById('institution').value;
+        const degree = document.getElementById('degree').value;
+        const major = document.getElementById('major').value;
+        const startYear = document.getElementById('startYear').value;
+        const endYear = document.getElementById('endYear').value;
+    
+        const data = await addEducation({ institution, degree, major, startYear, endYear });
         if (data) {
             const educationTab = document.getElementById('educationDetails');
-            educationTab.innerHTML += `<p>${data.description}</p>`;
-            document.getElementById('educationInput').value = ''; // 폼 리셋
+            educationTab.innerHTML += `
+                <div class="education-item">
+                    <h4>${data.institution}</h4>
+                    <p><strong>Degree:</strong> ${data.degree}</p>
+                    <p><strong>Major:</strong> ${data.major}</p>
+                    <p><strong>Period:</strong> ${data.startYear} - ${data.endYear}</p>
+                </div>
+            `;
+            document.getElementById('educationForm').reset(); // 폼 리셋
         }
     });
 
@@ -96,7 +129,14 @@ async function loadCareerData() {
     const data = await loadCareer();
     if (data) {
         const careerTab = document.getElementById('careerDetails');
-        careerTab.innerHTML = data.map(career => `<p>${career.description}</p>`).join('');
+        careerTab.innerHTML = data.map(career => `
+            <div class="career-item">
+                <h4>${career.company}</h4>
+                <p><strong>Role:</strong> ${career.role}</p>
+                <p><strong>Period:</strong> ${career.startDate} - ${career.endDate}</p>
+                <p><strong>Description:</strong> ${career.description}</p>
+            </div>
+        `).join('');
     }
 }
 
@@ -104,7 +144,13 @@ async function loadCertificationData() {
     const data = await loadCertification();
     if (data) {
         const certificationTab = document.getElementById('certificationDetails');
-        certificationTab.innerHTML = data.map(cert => `<p>${cert.description}</p>`).join('');
+        certificationTab.innerHTML = data.map(cert => `
+            <div class="certification-item">
+                <h4>${cert.certificationName}</h4>
+                <p><strong>Issuer:</strong> ${cert.issuer}</p>
+                <p><strong>Date Obtained:</strong> ${cert.dateObtained}</p>
+            </div>
+        `).join('');
     }
 }
 
@@ -112,7 +158,14 @@ async function loadEducationData() {
     const data = await loadEducation();
     if (data) {
         const educationTab = document.getElementById('educationDetails');
-        educationTab.innerHTML = data.map(edu => `<p>${edu.description}</p>`).join('');
+        educationTab.innerHTML = data.map(edu => `
+            <div class="education-item">
+                <h4>${edu.institution}</h4>
+                <p><strong>Degree:</strong> ${edu.degree}</p>
+                <p><strong>Major:</strong> ${edu.major}</p>
+                <p><strong>Period:</strong> ${edu.startYear} - ${edu.endYear}</p>
+            </div>
+        `).join('');
     }
 }
 

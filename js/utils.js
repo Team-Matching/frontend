@@ -8,8 +8,8 @@ export function setupNavigation() {
     // Local storage에 토큰이 있으면 로그인 상태로 간주
     const token = localStorage.getItem('token');
     if (token) {
-        const username = localStorage.getItem('username');
-        userGreeting.textContent = `Hello, ${username}`;
+        const email = localStorage.getItem('email');
+        userGreeting.textContent = `안녕하세요, ${email}님`;
         profileMenu.style.display = 'inline-block';
         signupBtn.style.display = 'none';
         loginBtn.style.display = 'none';

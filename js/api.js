@@ -52,7 +52,7 @@ export async function signIn(email, password) {
 export async function loadProfile() {
     try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`${API_BASE_URL}/profiles`, {
+        const response = await fetch(`${API_BASE_URL}/profiles/my-profile`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -61,7 +61,7 @@ export async function loadProfile() {
         const data = await response.json();
         console.log(data); // 응답 데이터를 콘솔에 출력하여 확인
         if (response.ok) {
-            return data.data;
+            return data.body;
         } else {
             alert('Failed to load profile: ' + (data.message || 'Unknown error'));
         }
@@ -83,7 +83,7 @@ export async function loadCareer() {
         const data = await response.json();
         console.log(data); // 응답 데이터를 콘솔에 출력하여 확인
         if (response.ok) {
-            return data.data;
+            return data.body;
         } else {
             alert('Failed to load career: ' + (data.message || 'Unknown error'));
         }
@@ -105,7 +105,7 @@ export async function loadCertification() {
         const data = await response.json();
         console.log(data); // 응답 데이터를 콘솔에 출력하여 확인
         if (response.ok) {
-            return data.data;
+            return data.body;
         } else {
             alert('Failed to load certification: ' + (data.message || 'Unknown error'));
         }
@@ -127,7 +127,7 @@ export async function loadEducation() {
         const data = await response.json();
         console.log(data); // 응답 데이터를 콘솔에 출력하여 확인
         if (response.ok) {
-            return data.data;
+            return data.body;
         } else {
             alert('Failed to load education: ' + (data.message || 'Unknown error'));
         }
@@ -149,7 +149,7 @@ export async function loadSkill() {
         const data = await response.json();
         console.log(data); // 응답 데이터를 콘솔에 출력하여 확인
         if (response.ok) {
-            return data.data;
+            return data.body;
         } else {
             alert('Failed to load skill: ' + (data.message || 'Unknown error'));
         }
@@ -171,7 +171,7 @@ export async function loadInterest() {
         const data = await response.json();
         console.log(data); // 응답 데이터를 콘솔에 출력하여 확인
         if (response.ok) {
-            return data.data;
+            return data.body;
         } else {
             alert('Failed to load interest: ' + (data.message || 'Unknown error'));
         }
@@ -195,7 +195,7 @@ export async function addCareer(career) {
         const data = await response.json();
         console.log(data); // 응답 데이터를 콘솔에 출력하여 확인
         if (response.ok) {
-            return data.data;
+            return data.body;
         } else {
             alert('Failed to add career: ' + (data.message || 'Unknown error'));
         }
@@ -219,7 +219,7 @@ export async function addCertification(certification) {
         const data = await response.json();
         console.log(data); // 응답 데이터를 콘솔에 출력하여 확인
         if (response.ok) {
-            return data.data;
+            return data.body;
         } else {
             alert('Failed to add certification: ' + (data.message || 'Unknown error'));
         }
@@ -243,7 +243,7 @@ export async function addEducation(education) {
         const data = await response.json();
         console.log(data); // 응답 데이터를 콘솔에 출력하여 확인
         if (response.ok) {
-            return data.data;
+            return data.body;
         } else {
             alert('Failed to add education: ' + (data.message || 'Unknown error'));
         }
@@ -267,7 +267,7 @@ export async function addSkill(skill) {
         const data = await response.json();
         console.log(data); // 응답 데이터를 콘솔에 출력하여 확인
         if (response.ok) {
-            return data.data;
+            return data.body;
         } else {
             alert('Failed to add skill: ' + (data.message || 'Unknown error'));
         }
@@ -291,7 +291,7 @@ export async function addInterest(interest) {
         const data = await response.json();
         console.log(data); // 응답 데이터를 콘솔에 출력하여 확인
         if (response.ok) {
-            return data.data;
+            return data.body;
         } else {
             alert('Failed to add interest: ' + (data.message || 'Unknown error'));
         }
