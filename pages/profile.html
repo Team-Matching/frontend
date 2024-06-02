@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <style>
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+        }
+
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        .tab button.active {
+            background-color: #ccc;
+        }
+
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>User Profile</h1>
+        <nav>
+            <ul>
+                <li><button id="mainBtn">Main Page</button></li>
+                <li><button id="logoutBtn">Log Out</button></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Profile Details</h2>
+        <div id="profileInfo"></div>
+
+        <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'Career')">Career</button>
+            <button class="tablinks" onclick="openTab(event, 'Certification')">Certification</button>
+            <button class="tablinks" onclick="openTab(event, 'Education')">Education</button>
+            <button class="tablinks" onclick="openTab(event, 'Skill')">Skill</button>
+            <button class="tablinks" onclick="openTab(event, 'Interest')">Interest</button>
+        </div>
+
+        <div id="Career" class="tabcontent">
+            <h3>Career</h3>
+            <div id="careerDetails"></div>
+            <form id="careerForm">
+                <input type="text" id="careerInput" placeholder="Career description" required>
+                <button type="submit">Add Career</button>
+            </form>
+        </div>
+
+        <div id="Certification" class="tabcontent">
+            <h3>Certification</h3>
+            <div id="certificationDetails"></div>
+            <form id="certificationForm">
+                <input type="text" id="certificationInput" placeholder="Certification description" required>
+                <button type="submit">Add Certification</button>
+            </form>
+        </div>
+
+        <div id="Education" class="tabcontent">
+            <h3>Education</h3>
+            <div id="educationDetails"></div>
+            <form id="educationForm">
+                <input type="text" id="educationInput" placeholder="Education description" required>
+                <button type="submit">Add Education</button>
+            </form>
+        </div>
+
+        <div id="Skill" class="tabcontent">
+            <h3>Skill</h3>
+            <div id="skillDetails"></div>
+            <form id="skillForm">
+                <input type="text" id="skillInput" placeholder="Skill description" required>
+                <button type="submit">Add Skill</button>
+            </form>
+        </div>
+
+        <div id="Interest" class="tabcontent">
+            <h3>Interest</h3>
+            <div id="interestDetails"></div>
+            <form id="interestForm">
+                <input type="text" id="interestInput" placeholder="Interest description" required>
+                <button type="submit">Add Interest</button>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2023 Team Matching</p>
+    </footer>
+    <script type="module" src="../js/profile.js"></script>
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.getElementsByClassName('tablinks')[0].click(); // 기본 탭 열기
+        });
+    </script>
+</body>
+</html>
