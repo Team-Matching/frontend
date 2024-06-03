@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Post</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+    <main>
+        <h2>New Team Post</h2>
+        <form id="postForm">
+            <input type="text" id="title" placeholder="제목" required>
+            <input type="number" id="teamMemberCount" placeholder="모집 인원" required>
+            <input type="text" id="category" placeholder="카테고리" required>
+            <textarea id="detail" placeholder="세부 사항" required></textarea>
+            <textarea id="summary" placeholder="Summary" required></textarea>
+            <button type="submit">등록</button>
+        </form>
+        <p id="postError" style="color: red;"></p>
+    </main>
+    <footer>
+        <p>&copy; 2023 Team Matching</p>
+    </footer>
+    <script type="module" src="../js/create_post.js"></script>
+</body>
+</html>

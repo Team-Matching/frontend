@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply to Post</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Apply to Post</h1>
+    </header>
+    <main>
+        <form id="applyForm">
+            <div>
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+            <div>
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" required></textarea>
+            </div>
+            <button type="submit">Submit Application</button>
+        </form>
+        <p id="applyError" style="color: red;"></p>
+    </main>
+    <footer>
+        <p>&copy; 2023 Team Matching</p>
+    </footer>
+    <script type="module" src="../js/apply.js"></script>
+</body>
+</html>

@@ -300,3 +300,132 @@ export async function addInterest(interest) {
         alert('An error occurred while adding interest.');
     }
 }
+
+// 추가된 API 함수들
+
+const POST_API_BASE_URL = 'http://localhost:8080/api/posts';
+
+export async function fetchPosts() {
+    const token = localStorage.getItem('token');
+    try {
+        const response = await fetch(`${POST_API_BASE_URL}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error:', error);
+        return null;
+    }
+}
+
+
+export async function createPost(postData) {
+    try {
+        const token = localStorage.getItem('token');
+        const response = await fetch(POST_API_BASE_URL, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(postData)
+        });
+        const data = await response.json();
+        console.log(data); // 응답 데이터를 콘솔에 출력하여 확인
+        if (response.ok) {
+            return { success: true };
+        } else {
+            return { success: false, message: data.message || 'Unknown error' };
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        return { success: false, message: 'An error occurred while creating post.' };
+    }
+}
+
+export async function fetchPostDetail(postId) {
+    try {
+        const token = localStorage.getItem('token');
+        const response = await fetch(`${POST_API_BASE_URL}/${postId}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        const data = await response.json();
+        console.log(data); // 응답 데이터를 콘솔에 출력하여 확인
+        if (response.ok) {
+            return data.body;
+        } else {
+            console.error('Failed to fetch post detail:', data.message);
+            return null;
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        return null;
+    }
+}
+
+export async function applyToPost(postId, applicationData) {
+    const token = localStorage.getItem('token');
+    try {
+        const response = await fetch(`${POST_API_BASE_URL}/${postId}/applications`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(applicationData)
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error:', error);
+        return { success: false, message: 'An error occurred while applying to the post.' };
+    }
+}
+export async function getPostApplications(postId) {
+    const token = localStorage.getItem('token');
+    try {
+        const response = await fetch(`${POST_API_BASE_URL}/${postId}/applications`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        const data = await response.json();
+        return data.body;
+    } catch (error) {
+        console.error('Error:', error);
+        return null;
+    }
+}
+export async function fetchUserProfileById(applicantId) {
+    const token = localStorage.getItem('token');
+    try {
+        const response = await fetch(`${API_BASE_URL}/profiles/${applicantId}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        const data = await response.json();
+        if (response.ok) {
+            return data.body;
+        } else {
+            console.error('Failed to fetch user profile:', data.message);
+            return null;
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        return null;
+    }
+}

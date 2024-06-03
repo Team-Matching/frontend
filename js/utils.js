@@ -2,6 +2,9 @@ export function setupNavigation() {
     const signupBtn = document.getElementById('signupBtn');
     const loginBtn = document.getElementById('loginBtn');
     const profileBtn = document.getElementById('profileBtn');
+    const teamBtn = document.getElementById('teamBtn');
+    const personalBtn = document.getElementById('personalBtn');
+    const logoutBtn = document.getElementById('logoutBtn');
     const profileMenu = document.getElementById('profileMenu');
     const userGreeting = document.getElementById('userGreeting');
 
@@ -32,6 +35,27 @@ export function setupNavigation() {
     if (profileBtn) {
         profileBtn.addEventListener('click', function() {
             window.location.href = 'pages/profile.html';
+        });
+    }
+
+    if (teamBtn) {
+        teamBtn.addEventListener('click', function() {
+            window.location.href = 'pages/team.html';
+        });
+    }
+
+    if (personalBtn) {
+        personalBtn.addEventListener('click', function() {
+            window.location.href = 'pages/personal.html';
+        });
+    }
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', function() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('email');
+            alert('Logged out successfully!');
+            window.location.href = '../index.html';
         });
     }
 }
